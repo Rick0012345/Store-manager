@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  adm-database: 
+    image: postgres:latest 
+    container_name: adm-database
+    ports:
+      - "5432:5432"  # Porta fixa para evitar conflitos
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    restart: always
+    volumes:
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    networks:
+      - adm-network
+
+  store-manager:
+    container_name: store-manager
+    hostname: "${HOSTNAME}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/project
+    volumes:
+      - ./project/:/usr/src/project
+    ports:
+      - "8000:8000"  # Porta fixa para alinhar com o Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=True
+      - OAUTHLIB_INSECURE_TRANSPORT=False
+      - DEBUG=false  # Desative em produção!
+    env_file:
+      - .env  # Sintaxe corrigida
+    depends_on:
+      - adm-database
+    networks:
+      - adm-network
+
+networks:
+  adm-network:
+    external: true

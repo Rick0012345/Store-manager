@@ -8,5 +8,5 @@ rcssmin==1.1.1
 rjsmin==1.2.1
 sqlparse==0.4.4
 typing_extensions==4.9.0
-requests==2.31.0 #depois mudar para 2.32.3
-djangorestframework
+requests==2.31.0 
+django-bootstrap5

@@ -1,12 +1,15 @@
+
 .nav-link {
     color: #000000 !important;
+    font-size: 100% !important;
+    display: inline-block; /* Necessário para o transform funcionar corretamente */
 }
+
 .nav-link:hover {
-    border-radius: 60% !important;
-    background-color: #1e5f9c31 !important;
-    
-    
+    transform: scale(1.05); /* Aumenta em 10% */
+    transition: transform 0.3s ease-in-out !important;
 }
+
 .navbar-brand {
     text-decoration: solid !important;
 

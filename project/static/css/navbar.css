@@ -1,8 +1,34 @@
 .nav-link {
-    color: #1a4269 !important;
+    color: #000000 !important;
 }
-.navbar-brand{
-    color: red !important;
-    background-color: aquamarine;
+.nav-link:hover {
+    border-radius: 60% !important;
+    background-color: #1e5f9c31 !important;
+    
+    
+}
+.navbar-brand {
+    text-decoration: solid !important;
+
 }
 
+
+.navbar {
+    background: linear-gradient(-45deg, #e49161, #66ee88, #6dc9eb, #9889f0);
+    background-size: 300% 100% ;
+    animation: gradient 10s ease-in-out infinite ;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+   
+    50% {
+        background-position: 100% 0%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}

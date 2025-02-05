@@ -1,7 +1,8 @@
-.bg-light{
-    background-color: #0973b9;
+.nav-link {
+    color: #1a4269 !important;
+}
+.navbar-brand{
+    color: red !important;
+    background-color: aquamarine;
 }
 
-body{
-    background-color: #d14141;
-}

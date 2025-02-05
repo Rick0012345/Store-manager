@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extrahead %}
-    <title>Cadastrar Produto</title>
+    <title>Cadastrar Produtos</title>
     <link rel="stylesheet" href="{% static 'css/forms/cadastro_produto_form.css' %}">
     {% endblock extrahead %}
 
 {% block content %}
 
-    <h1 class="text-center">Cadastrar Produto</h1>
-    <form method="post">
+    <h1 class="text-center">Cadastrar Produtos</h1>
+    <form class="form" method="post">
         {% csrf_token %}
         nome: {{ form.nome }}
 
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            {{ form.preco }}
-          </div>
+                {{ form.preco }}
+        </div>
 
         <button class="btn btn-success" type="submit">Salvar</button>
     </form>

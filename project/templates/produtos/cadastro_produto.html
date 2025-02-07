@@ -8,16 +8,28 @@
 {% block content %}
 
     <h1 class="text-center">Cadastrar Produtos</h1>
-    <form class="form" method="post">
-        {% csrf_token %}
-        nome: {{ form.nome }}
+    <div class="mb-3">
+        <label for="tipo_produto" class="form-label">Tipo de Produto</label>
+        <select id="tipo_produto" name="tipo_produto" class="form-select">
+            <option selected>Selecione</option>
+            <option value="1">Computador</option>
+            <option value="2">Celular</option>
+            <option value="3">Tablet</option>
+        </select>
+        <hr>
+    </div>
+    <div class="mb-3">
+        <form class="form" method="post">
+            {% csrf_token %}
+            nome: {{ form.nome }}
 
-        <div class="input-group mb-3">
-            <span class="input-group-text">$</span>
-                {{ form.preco }}
-        </div>
-
-        <button class="btn btn-success" type="submit">Salvar</button>
-    </form>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                    {{ form.preco }}
+            </div>
+        </form>
+        <hr>
+    </div>
+    <div class="mb-3"> <button class="btn btn-success" type="submit">Salvar</button></div>
 
 {% endblock content %}

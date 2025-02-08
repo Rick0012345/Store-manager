@@ -10,12 +10,7 @@
     <h1 class="text-center">Cadastrar Produtos</h1>
     <div class="mb-3">
         <label for="tipo_produto" class="form-label">Tipo de Produto</label>
-        <select id="tipo_produto" name="tipo_produto" class="form-select">
-            <option selected>Selecione</option>
-            <option value="1">Computador</option>
-            <option value="2">Celular</option>
-            <option value="3">Tablet</option>
-        </select>
+        {{ form.tipo }}
         <hr>
     </div>
     <div class="mb-3">
@@ -30,6 +25,10 @@
         </form>
         <hr>
     </div>
-    <div class="mb-3"> <button class="btn btn-success" type="submit">Salvar</button></div>
+    <div class="mb-3"> 
+        <button class="btn btn-success" type="submit">Salvar</button>
+        <button class="btn btn-success" type="submit">Salvar e continuar </button>
+        <button class="btn btn-danger">Cancelar</button>
+    </div>
 
 {% endblock content %}

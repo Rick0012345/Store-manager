@@ -3,33 +3,29 @@
 {% block extrahead %}
     <title>Cadastrar Produtos</title>
     <link rel="stylesheet" href="{% static 'css/forms/cadastro_produto_form.css' %}">
-    {% endblock extrahead %}
+{% endblock extrahead %}
 
 {% block content %}
-
     <h1 class="text-center">Cadastrar Produtos</h1>
-    <div class="mb-3">
-        <label for="tipo_produto" class="form-label">Tipo de Produto</label>
-        {{ form.tipo }}
-        <hr>
-    </div>
-    <div class="mb-3">
-        <form class="form" method="post">
-            {% csrf_token %}
+    <form method="post">  <!-- Única tag <form> -->
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="tipo_produto" class="form-label">Tipo de Produto</label>
+            {{ form.tipo }}
+            <hr>
+        </div>
+        <div class="mb-3">
             nome: {{ form.nome }}
-
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
-                    {{ form.preco }}
+                {{ form.preco }}
             </div>
-        
-        <hr>
-    </div>
-            <div class="mb-3"> 
-                <button class="btn btn-success" type="submit">Salvar</button>
-                <button class="btn btn-success" type="submit">Salvar e continuar </button>
-                <button class="btn btn-danger">Cancelar</button>
-            </div>
-        </form>
-
+            <hr>
+        </div>
+        <div class="mb-3"> 
+            <button class="btn btn-success" type="submit" name="salvar">Salvar</button>
+            <button class="btn btn-success" type="submit" name="salvar_continuar">Salvar e continuar</button>
+            <button class="btn btn-danger" type="button">Cancelar</button>
+        </div>
+    </form>
 {% endblock content %}

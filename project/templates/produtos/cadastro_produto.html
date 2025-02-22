@@ -7,11 +7,14 @@
 
 {% block content %}
     <h1 class="text-center">Cadastrar Produtos</h1>
-    <form method="post">  <!-- Única tag <form> -->
+    <form method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label for="tipo_produto" class="form-label">Tipo de Produto</label>
-            {{ form.tipo }}
+            <div class="d-flex align-items-center">
+                {{ form.tipo }}
+                <a href="#" id="cadastrar-tipo-link" class="ms-2">Cadastrar Novo Tipo</a>
+            </div>
             <hr>
         </div>
         <div class="mb-3">
@@ -28,4 +31,61 @@
             <button class="btn btn-danger" type="button">Cancelar</button>
         </div>
     </form>
+
+    <!-- Formulário de cadastro de tipos de produto (inicialmente oculto) -->
+    <div id="cadastrar-tipo-form" style="display: none;">
+        <h2>Cadastrar Novo Tipo de Produto</h2>
+        <form id="tipo-produto-form" method="post" action="{% url 'cadastrar_tipo' %}">
+            {% csrf_token %}
+            {{ tipo_form.as_p }}
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+    </div>
+
+    <!-- JavaScript para mostrar/ocultar o formulário e enviar via AJAX -->
+    <script>
+        // Mostra/oculta o formulário de tipos de produto
+        document.getElementById('cadastrar-tipo-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            var form = document.getElementById('cadastrar-tipo-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Envia o formulário de tipos de produto via AJAX
+        document.getElementById('tipo-produto-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Impede o envio padrão do formulário
+
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',  // Indica que é uma requisição AJAX
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Adiciona o novo tipo ao campo "Tipo de Produto"
+                    var select = document.getElementById('id_tipo');
+                    var option = document.createElement('option');
+                    option.value = data.id;
+                    option.text = data.tipo;
+                    select.add(option);
+                    select.value = data.id;  // Seleciona o novo tipo
+
+                    // Oculta o formulário de tipos de produto
+                    document.getElementById('cadastrar-tipo-form').style.display = 'none';
+                } else {
+                    // Exibe erros de validação
+                    alert('Erro ao cadastrar tipo: ' + JSON.stringify(data.errors));
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    </script>
 {% endblock content %}

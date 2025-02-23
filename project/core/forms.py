@@ -3,7 +3,7 @@ from .models import Produto, TipoProduto
 from django import forms
 
 class ProdutoForm(ModelForm):
-    tipo = forms.ModelChoiceField(  # Alterado para ModelChoiceField
+    tipo = forms.ModelChoiceField(
         queryset=TipoProduto.objects.all(),
         empty_label="Selecione um tipo"
     )
@@ -17,7 +17,8 @@ class ProdutoForm(ModelForm):
         # Adicione classes Bootstrap a todos os campos
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
-
+            if field_name == 'nome':
+                field.widget.attrs['placeholder'] = 'Nome do produto'
 
 class TipoProdutoForm(ModelForm):
     class Meta:

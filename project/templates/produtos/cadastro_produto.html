@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1 class="text-center">Cadastrar Produtos</h1>
-    <form method="post">
+    <form class="form" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label for="tipo_produto" class="form-label">Tipo de Produto</label>
@@ -18,7 +18,7 @@
             <hr>
         </div>
         <div class="mb-3">
-            nome: {{ form.nome }}
+            {{ form.nome }}
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
                 {{ form.preco }}
@@ -34,7 +34,7 @@
 
     <!-- Formulário de cadastro de tipos de produto (inicialmente oculto) -->
     <div id="cadastrar-tipo-form" style="display: none;">
-        <h2>Cadastrar Novo Tipo de Produto</h2>
+        <h3 class="text-center">Cadastrar Novo Tipo de Produto</h3>
         <form id="tipo-produto-form" method="post" action="{% url 'cadastrar_tipo' %}">
             {% csrf_token %}
             {{ tipo_form.as_p }}
@@ -42,7 +42,7 @@
         </form>
     </div>
 
-    <!-- JavaScript para mostrar/ocultar o formulário e enviar via AJAX -->
+
     <script>
         // Mostra/oculta o formulário de tipos de produto
         document.getElementById('cadastrar-tipo-link').addEventListener('click', function(event) {

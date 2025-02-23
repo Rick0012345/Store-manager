@@ -3,3 +3,9 @@
     
     max-width: 100px !important;
 }
+.form {
+    background-color: #d1d1d1 !important;
+}
+.form-control{
+    width: 200px !important;
+}
